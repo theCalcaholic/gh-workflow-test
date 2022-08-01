@@ -61,7 +61,7 @@ jobs:
               tail -n 20 geckodriver.log >&2 || true
               echo "================"
               echo "ncp.log: "
-              machinectl shell ncp /bin/bash -c "tail -n20 /var/log/ncp.log"
+              sudo machinectl shell ncp /bin/bash -c "tail -n20 /var/log/ncp.log"
               sleep 6
               continue
             }
@@ -94,7 +94,7 @@ jobs:
               tail -n 20 geckodriver.log >&2 || true
               echo "================"
               echo "ncp.log: "
-              machinectl shell ncp /bin/bash -c "tail -n20 /var/log/ncp.log"
+              sudo machinectl shell ncp /bin/bash -c "tail -n20 /var/log/ncp.log"
               sleep 6
               continue
             }
