@@ -8,6 +8,8 @@ jobs:
   test-img:
     runs-on: ubuntu-latest
     steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
       - uses: actions/checkout@v3
         with:
           repository: 'nextcloud/nextcloudpi'
@@ -20,7 +22,7 @@ jobs:
           mv NextCloudPi_*.img ncp.img
           source ./build/buildlib.sh
           mount_raspbian ncp.img
-          cp /usr/bin/qemu-aarch64-static raspbian_root/usr/bin/
+          cp qemu-aarch64-static raspbian_root/usr/bin/
           echo 'Mutex posixsem' >> raspbian_root/etc/apache2/mods-available/ssl.conf
 
       - name: Run and test container
