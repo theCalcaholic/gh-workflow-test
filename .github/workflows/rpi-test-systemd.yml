@@ -38,6 +38,7 @@ jobs:
           for i in {1..30}
           do
             echo ":: Wait for container to startup (attempt $i/30) ::"
+            sudo machinectl shell root@ncp /bin/bash -c "ip a"
             sudo machinectl shell root@ncp /bin/bash -c "ip r"
             sudo machinectl shell root@ncp /bin/bash -c "ip a show dev '$iface'"
             iface="$(sudo machinectl shell root@ncp /bin/bash -c "ip r" | grep "default via" | awk '{ print $5 }' | head -1)"
