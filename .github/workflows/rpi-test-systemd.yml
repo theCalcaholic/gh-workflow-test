@@ -31,8 +31,7 @@ jobs:
       - name: Run and test container
         run: |
           set -ex
-          sudo systemd-nspawn --boot -D ./raspbian_root/ -M ncp --hostname=nextcloudpi --private-network \
-            -p 80:80 -p 443:443 -p 4443:4443 -p 122:22 &
+          sudo systemd-nspawn --boot -D ./raspbian_root/ -M ncp --hostname=nextcloudpi &
           
           success=false
           for i in {1..10}
@@ -46,6 +45,7 @@ jobs:
           
           [[ "$success" == "true" ]] || {
             echo "Could not reach container. Aborting..."
+            exit 1
           }
           
           success=false
