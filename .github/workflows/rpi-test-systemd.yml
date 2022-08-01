@@ -33,8 +33,9 @@ jobs:
           set -ex
           sudo systemd-nspawn --boot -D ./raspbian_root/ -M ncp --hostname=nextcloudpi &> container.log &
           
+          sleep 30
           success=false
-          for i in {1..10}
+          for i in {1..20}
           do
             echo ":: Wait for container to startup (attempt $i/10) ::"
             iface="$(machinectl shell root@ncp /bin/bash -c "ip r" | grep "default via" | awk '{ print $5 }' | head -1)"
