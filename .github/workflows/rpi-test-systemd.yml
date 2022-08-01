@@ -23,13 +23,13 @@ jobs:
           source ./build/buildlib.sh
           mount_raspbian ncp.img
           wget -q https://github.com/multiarch/qemu-user-static/releases/latest/download/qemu-aarch64-static -O ./qemu-aarch64-static
-          cp qemu-aarch64-static raspbian_root/usr/bin/
-          echo 'Mutex posixsem' >> raspbian_root/etc/apache2/mods-available/ssl.conf
+          sudo cp qemu-aarch64-static raspbian_root/usr/bin/
+          echo 'Mutex posixsem' | sudo tee -a raspbian_root/etc/apache2/mods-available/ssl.conf
 
       - name: Run and test container
         run: |
           set -ex
-          systemd-nspawn --boot -D ./raspbian_root/ -M ncp --hostname=nextcloudpi --private-network \
+          sudo systemd-nspawn --boot -D ./raspbian_root/ -M ncp --hostname=nextcloudpi --private-network \
             -p 80:80 -p 443:443 -p 4443:4443 -p 122:22 &
           
           for i in {1..10}
@@ -92,5 +92,5 @@ jobs:
           done
           
           result=$?
-          machinectl terminate ncp || true
+          sudo machinectl terminate ncp || true
           exit "$result"
