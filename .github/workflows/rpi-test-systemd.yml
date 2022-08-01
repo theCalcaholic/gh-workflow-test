@@ -31,7 +31,7 @@ jobs:
       - name: Run and test container
         run: |
           set -ex
-          sudo systemd-nspawn --boot -D ./raspbian_root/ -M ncp --hostname=nextcloudpi
+          sudo systemd-nspawn --boot -D ./raspbian_root/ -M ncp --hostname=nextcloudpi &> container.log
           
           success=false
           for i in {1..10}
@@ -45,6 +45,8 @@ jobs:
           
           [[ "$success" == "true" ]] || {
             echo "Could not reach container. Aborting..."
+            echo "Container logs:"
+            cat container.log
             exit 1
           }
           
