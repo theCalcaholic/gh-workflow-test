@@ -17,12 +17,12 @@ jobs:
       - name: Prepare image
         run: |
           set -e
-          wget -O ncp.tar.gz https://github.com/nextcloud/nextcloudpi/releases/download/v1.48.3/NextCloudPi_RPi_07-25-22.tar.gz
+          wget -q -O ncp.tar.gz https://github.com/nextcloud/nextcloudpi/releases/download/v1.48.3/NextCloudPi_RPi_07-25-22.tar.gz
           tar xf ncp.tar.gz
           mv NextCloudPi_*.img ncp.img
           source ./build/buildlib.sh
           mount_raspbian ncp.img
-          cp qemu-aarch64-static raspbian_root/usr/bin/
+          cp /usr/bin/qemu-aarch64-static raspbian_root/usr/bin/
           echo 'Mutex posixsem' >> raspbian_root/etc/apache2/mods-available/ssl.conf
 
       - name: Run and test container
