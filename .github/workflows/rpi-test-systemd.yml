@@ -34,7 +34,7 @@ jobs:
           #sudo iptables -A FORWARD -o ve-%i -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT ; \
           #  -/usr/bin/iptables -A FORWARD -i ve-%i ! -o ve-%i -j ACCEPT ; \
           #  -/usr/bin/iptables -A FORWARD -i ve-%i -o ve-%i -j ACCEPT
-          sudo systemd-nspawn --boot -D ./raspbian_root/ -M ncp -n --hostname=nextcloudpi &> container.log &
+          sudo systemd-nspawn --boot -D ./raspbian_root/ -M ncp --hostname=nextcloudpi &> container.log &
           
           sleep 30
           sudo machinectl show ncp
