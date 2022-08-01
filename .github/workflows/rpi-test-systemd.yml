@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: 'nextcloud/nextcloudpi'
-          ref: devel
+          ref: feature/cicd/sd-image-tests
       - name: Prepare image
         run: |
           set -ex
