@@ -35,9 +35,9 @@ jobs:
           
           sleep 30
           success=false
-          for i in {1..30}
+          for i in {1..50}
           do
-            echo ":: Wait for container to startup (attempt $i/30) ::"
+            echo ":: Wait for container to startup (attempt $i/50) ::"
             sudo machinectl shell root@ncp /bin/bash -c "ip a"
             sudo machinectl shell root@ncp /bin/bash -c "ip r"
             sudo machinectl shell root@ncp /bin/bash -c "ip a show dev '$iface'"
