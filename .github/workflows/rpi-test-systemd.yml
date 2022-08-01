@@ -22,7 +22,9 @@ jobs:
           mv NextCloudPi_*.img ncp.img
           source ./build/buildlib.sh
           mount_raspbian ncp.img
-          cp /usr/bin/qemu-aarch64-static raspbian_root/usr/bin/
+          which qemu-aarch64-static
+          wget -q https://github.com/multiarch/qemu-user-static/releases/latest/download/qemu-aarch64-static -O ./qemu-aarch64-static
+          cp qemu-aarch64-static raspbian_root/usr/bin/
           echo 'Mutex posixsem' >> raspbian_root/etc/apache2/mods-available/ssl.conf
 
       - name: Run and test container
